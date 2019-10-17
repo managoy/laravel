@@ -1,0 +1,142 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Company;
+use App\Customer;
+use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+
+class CustomersController extends Controller
+{
+
+    public function index()
+    {
+        $customers = Customer::all();
+//        $activeCustomers = Customer::active()->get();
+//        $inactiveCustomers = Customer::inactive()->get();
+//
+//        return view('internal.customers', [
+//            'activeCustomers' => $activeCustomers,
+//            'inactiveCustomers' => $inactiveCustomers,
+//        ]);
+
+        // dd($customers);
+        return view('customers.index', compact('customers'));
+    }
+
+
+    public function create()
+    {
+        $companies = Company::all();
+        $customer = new Customer();
+        return view('customers.create', compact('companies', 'customer'));
+    }
+
+    public function store()
+    {
+
+
+        $customer = Customer::create($this->ValidateRequest());
+
+        $this->storeImage($customer);
+//        $customer = new Customer();
+//        $customer->name = request('name');
+//        $customer->email = request('email');
+//        $customer->active = request('active');
+//        $customer->save();
+
+        return redirect('customers');
+    }
+
+    public function show(Customer $customer)
+    {
+
+        //without route model binding
+        //$customer = Customer::find($customer);
+        //$customer = Customer::where('id', $customer)->firstOrFail();
+        return view('customers.show', compact('customer'));
+    }
+
+    public function edit(Customer $customer)
+    {
+
+        $companies = Company::all();
+        return view('customers.edit', compact('customer', 'companies'));
+    }
+
+    public function update(Customer $customer)
+    {
+
+        $customer->update($this->ValidateRequest());
+        $this->storeImage($customer);
+        return redirect('customers/' . $customer->id);
+    }
+
+    public function destroy(Customer $customer)
+    {
+
+        $customer->delete();
+        return redirect('customers');
+    }
+
+    private function ValidateRequest()
+    {
+
+//        return request()->validate([
+//            'name' => 'required|min:3',
+//            'email' => 'required|email',
+//            'active' => 'required',
+//            'company_id' => 'required'
+//        ]);
+
+
+//        $validateData = request()->validate([
+//            'name' => 'required|min:3',
+//            'email' => 'required|email',
+//            'active' => 'required',
+//            'company_id' => 'required'
+//        ]);
+//
+//        if(request()->hasFile('image')){
+//            \request()->validate([
+//                'image' =>'file|image|max:5000',
+//            ]);
+//        }
+//
+//        return $validateData;
+
+        //Using Tap
+        return tap(request()->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email',
+            'active' => 'required',
+            'company_id' => 'required'
+
+        ]), function () {
+
+            if (request()->hasFile('image')) {
+                \request()->validate([
+                    'image' => 'file|image|max:5000',
+                ]);
+
+            }
+        });
+    }
+
+    private function storeImage($customer)
+    {
+
+        if (request()->has('image')) {
+
+            $customer->update([
+                'image' => request()->image->store('uploads', 'public'),
+            ]);
+
+            $image = Image::make(public_path('storage/' . $customer->image))->fit(300,300);
+
+            $image->save();
+
+        }
+    }
+}
