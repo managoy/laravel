@@ -6,6 +6,7 @@ use App\Company;
 use App\Customer;
 use App\Http\Requests\StoreCustomer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 
 class CustomersController extends Controller
@@ -37,16 +38,22 @@ class CustomersController extends Controller
     public function store(StoreCustomer $request)
     {
 
-        $data = $request->validated();
-        $customer = Customer::create($data);
+       // $data = $request->validated();
+        DB::transaction(function () use ($request){
+            $data = $request->data();
+            $customer = Customer::create($data);
 
-        $this->storeImage($customer);
-//        $customer = new Customer();
-//        $customer->name = request('name');
-//        $customer->email = request('email');
-//        $customer->active = request('active');
-//        $customer->save();
+            $this->storeImage($customer);
+        });
 
+        /*
+        //without using create($data)
+        $customer = new Customer();
+        $customer->name = request('name');
+        $customer->email = request('email');
+        $customer->active = request('active');
+        $customer->save();
+        */
         return redirect('customers');
     }
 
@@ -68,7 +75,8 @@ class CustomersController extends Controller
 
     public function update(Customer $customer, StoreCustomer $request)
     {
-        $data = $request->validated();
+        //$data = $request->validated();
+        $data =$request->data();
         $customer->update($data);
         $this->storeImage($customer);
         return redirect('customers/' . $customer->id);

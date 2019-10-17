@@ -28,7 +28,20 @@ class StoreCustomer extends FormRequest
             'email' => 'required|email',
             'active' => 'required',
             'company_id' => 'required',
-            'image' => 'sometimes|file|max:5000',
+            'image' => 'sometimes|file|mimes:jpeg,bmp,png|max:5000',
         ];
+    }
+
+    public function data(){
+       $data =[
+            'name' => $this->get('name'),
+            'email' => $this->get('email'),
+            'active' => $this->get('active'),
+            'company_id' => $this->get('company_id'),
+            'image' => $this->get('image'),
+
+        ];
+
+       return $data;
     }
 }

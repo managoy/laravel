@@ -15,7 +15,8 @@ class ContactFormController extends Controller
 
     public function store(StoreContactForm $request){
 
-        $data = $request->validated();
+//        $data = $request->validated();
+        $data = $request->data();
 
         // Send An Email
         Mail::to('test@test.com')->send(new ContactFormMail($data));

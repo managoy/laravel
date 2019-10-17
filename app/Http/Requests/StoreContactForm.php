@@ -24,7 +24,7 @@ class StoreContactForm extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|min:3',
             'email' => 'required|email',
             'description' => 'required',
         ];
@@ -34,7 +34,7 @@ class StoreContactForm extends FormRequest
      * Get data of respective form
      * @return array
      */
-    /*public function data(){
+    public function data(){
         $data = [
             'name' => $this->get('name'),
             'email' => $this->get('email'),
@@ -42,5 +42,5 @@ class StoreContactForm extends FormRequest
         ];
 
         return $data;
-    }*/
+    }
 }
