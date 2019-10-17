@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4436172e-8967-4cad-a276-71f6dd58a547" name="Default Changelist" comment="" />
+    <list default="true" id="4436172e-8967-4cad-a276-71f6dd58a547" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/emails/contact/contact-mail.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/emails/contact/layout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CustomersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CustomersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/contact.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/contact/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +139,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/contact" />
       <recent name="$PROJECT_DIR$/storage/app/public/uploads" />
       <recent name="$PROJECT_DIR$/resources" />
       <recent name="$PROJECT_DIR$/resources/js" />
@@ -179,7 +187,7 @@
       <workItem from="1571110159664" duration="12706000" />
       <workItem from="1571131433453" duration="4940000" />
       <workItem from="1571195589308" duration="23424000" />
-      <workItem from="1571283525352" duration="1847000" />
+      <workItem from="1571283525352" duration="12957000" />
     </task>
     <servers />
   </component>

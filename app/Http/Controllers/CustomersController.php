@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Customer;
+use App\Http\Requests\StoreCustomer;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -33,11 +34,11 @@ class CustomersController extends Controller
         return view('customers.create', compact('companies', 'customer'));
     }
 
-    public function store()
+    public function store(StoreCustomer $request)
     {
 
-
-        $customer = Customer::create($this->ValidateRequest());
+        $data = $request->validated();
+        $customer = Customer::create($data);
 
         $this->storeImage($customer);
 //        $customer = new Customer();
@@ -65,10 +66,10 @@ class CustomersController extends Controller
         return view('customers.edit', compact('customer', 'companies'));
     }
 
-    public function update(Customer $customer)
+    public function update(Customer $customer, StoreCustomer $request)
     {
-
-        $customer->update($this->ValidateRequest());
+        $data = $request->validated();
+        $customer->update($data);
         $this->storeImage($customer);
         return redirect('customers/' . $customer->id);
     }

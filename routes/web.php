@@ -19,12 +19,15 @@
 
  use Intervention\Image\Facades\Image;
 
+
  Route::view('/','home');
-Route::view('vue','Vue.test');
-Route::post('formSubmit','FormController@submit');
+ Route::view('vue','Vue.test');
+ Route::post('formSubmit','FormController@submit');
 
+ Route::get('contact','ContactFormController@create');
+ Route::post('contact','ContactFormController@store');
 
-Route::view('contact','contact');
+//Route::view('contact','contact');
 
 // Route::get('contact', function(){
 //     return view('contact');
