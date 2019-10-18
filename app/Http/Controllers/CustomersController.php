@@ -12,6 +12,12 @@ use Intervention\Image\Facades\Image;
 class CustomersController extends Controller
 {
 
+    public function __construct()
+    {
+        //middleware allow the user to only use the index method without login
+        $this->middleware('auth')->except(['index']);
+    }
+
     public function index()
     {
         $customers = Customer::all();

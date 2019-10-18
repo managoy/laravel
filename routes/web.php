@@ -39,7 +39,8 @@
 //     return view('about');
 // });
 
-
+//Use of middleware green light red light
+ //Route::get('customers', 'CustomersController@index')->middleware('auth');
  Route::get('customers', 'CustomersController@index');
  Route::get('customers/create', 'CustomersController@create');
  Route::post('customers','CustomersController@store');
@@ -84,3 +85,7 @@
 
  });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
