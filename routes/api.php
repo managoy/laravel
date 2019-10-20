@@ -19,3 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('formSubmit','FormController@submit');
 
+
+Route::post('vue','TestingVueController@index');
+

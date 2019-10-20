@@ -12,7 +12,8 @@
 
     <div class="row">
         <div class="col-12">
-            <form action="/customers/{{$customer->id}}" method="POST" enctype="multipart/form-data">
+{{--            <form action="/customers/{{$customer->id}}" method="POST" enctype="multipart/form-data">--}}
+            <form action={{ route('customer.update',['customer' => $customer]) }} enctype="multipart/form-data">
                 @method('PATCH')
 
                 @include('customers.form')

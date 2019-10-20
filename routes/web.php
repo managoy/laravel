@@ -24,14 +24,19 @@
  Route::view('vue','Vue.test');
  Route::post('formSubmit','FormController@submit');
 
- Route::get('contact','ContactFormController@create');
- Route::post('contact','ContactFormController@store');
+ Route::get('contact','ContactFormController@create')->name('contact.create');
+ Route::post('contact','ContactFormController@store')->name('contact.store');
 
 //Route::view('contact','contact');
 
 // Route::get('contact', function(){
 //     return view('contact');
 // });
+
+ /**
+  * One of the methods of implementing middleware
+  */
+ //Route::view('about','about')->middleware('test');
 
  Route::view('about','about');
 

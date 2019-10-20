@@ -4,18 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Customer;
+use App\Events\NewCustomerHasRegisteredEvent;
 use App\Http\Requests\StoreCustomer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 
 class CustomersController extends Controller
 {
 
+    private $customer;
     public function __construct()
     {
         //middleware allow the user to only use the index method without login
-        $this->middleware('auth')->except(['index']);
+        //$this->middleware('auth')->except(['index']);
     }
 
     public function index()
@@ -47,11 +50,18 @@ class CustomersController extends Controller
        // $data = $request->validated();
         DB::transaction(function () use ($request){
             $data = $request->data();
-            $customer = Customer::create($data);
+            $this->customer = Customer::create($data);
 
             $this->storeImage($customer);
         });
 
+        event(new NewCustomerHasRegisteredEvent($this->customer));
+
+
+        //Register to NewsLetter
+        //dump('Registered to newsletter');
+        //Slack Notification to Admin
+        //dump('Slack message here');
         /*
         //without using create($data)
         $customer = new Customer();
