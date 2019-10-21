@@ -1,6 +1,5 @@
-
 <div class="row">
-    <div class="col-12"> <h1>Customer List</h1></div>
+    <div class="col-12"><h1>Customer List</h1></div>
     <p><a href="customers/create">Add New Customer</a></p>
 </div>
 
@@ -11,7 +10,7 @@
         </div>
 
         <div class="col-4">
-           <a href="/customers/{{ $customer->id }}">{{ $customer->name }}</a>
+            <a href="/customers/{{ $customer->id }}">{{ $customer->name }}</a>
 
         </div>
 
@@ -23,3 +22,8 @@
     </div>
 @endforeach
 
+<div class="row">
+    <div class="col-12 d-flex justify-content-center pt-5">
+        {{ $customers->links() }}
+    </div>
+</div>

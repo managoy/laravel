@@ -40,8 +40,10 @@ class CustomerList extends AbstractWidget
     }
 
     public function getData(){
-        $companies = Customer::all();
+        //$companies = Customer::all(); //Blunder Mistake I had been adding all CUSTOMERS to a COMPANIES Variable ahhah!!!
         //dd($companies);
-        return $companies;
+        //return $companies;
+        $customers = Customer::with('company')->paginate(15);
+        return $customers;
     }
 }
