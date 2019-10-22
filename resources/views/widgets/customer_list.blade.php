@@ -1,7 +1,17 @@
 <div class="row">
     <div class="col-12"><h1>Customer List</h1></div>
-    <p><a href="customers/create">Add New Customer</a></p>
 </div>
+
+@can('create', App\Customer::class)
+    <div class="row">
+        <div class="col-12">
+            <p><a href="customers/create">Add New Customer</a></p>
+        </div>
+
+    </div>
+
+@endcan
+
 
 @foreach($customers as $customer)
     <div class="row">
@@ -10,8 +20,13 @@
         </div>
 
         <div class="col-4">
+            @can('view',$customer)
             <a href="/customers/{{ $customer->id }}">{{ $customer->name }}</a>
+            @endcan
 
+            @cannot('view',$customer)
+            {{ $customer->name }}
+            @endcannot
         </div>
 
         <div class="col-4">

@@ -48,12 +48,14 @@ class CustomersController extends Controller
     public function store(StoreCustomer $request)
     {
 
+        $this->authorize('create', Customer::class);
+
        // $data = $request->validated();
         DB::transaction(function () use ($request){
             $data = $request->data();
             $this->customer = Customer::create($data);
 
-            $this->storeImage($customer);
+            $this->storeImage($this->customer);
         });
 
         event(new NewCustomerHasRegisteredEvent($this->customer));
@@ -101,7 +103,7 @@ class CustomersController extends Controller
 
     public function destroy(Customer $customer)
     {
-
+        $this->authorize('delete', $customer);
         $customer->delete();
         return redirect('customers');
     }
